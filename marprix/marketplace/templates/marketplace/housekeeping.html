@@ -1,0 +1,47 @@
+{% extends 'marketplace/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+<div class="alert alert-success">
+  <strong>Success!</strong> The product prices are saved successfully
+</div>
+<form action="{% url 'marketplace:save' %}" method="post">
+{% csrf_token %}
+<div class="row">
+
+    {% for category in all_categories %}
+    <section class="col category">
+        <h1 class="category-title">{{ category.name }}<br><small>Price (CEDI per bowl)</small></h1>
+
+        <table class="table table">
+            <tbody>
+                {% for product in all_products %}
+                {% if product.category_id == category.id %}
+                <tr>
+                    <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
+                    <td class="name">{{ product.name }}<input type="number" class="form-control product-price" name="price-1" value="{{ product.price }}"></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                <tr>
+                    <td></td><td><button class="save btn btn-sm btn-outline-secondary"><i class="fas fa-plus"></i> Add</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </section>
+    {% endfor %}
+
+</div>
+</form>
+</div>
+    <div class="container text-center">
+        <button formaction="updateveg.php" class="save btn btn-lg btn-outline-success" formtarget="votar" type="submit"><i class="fas fa-save"></i> Save changes</button>
+    </div>
+    <div class="container text-center mt-3 ">
+        <a href="/">Back to overview</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'marketplace/layout.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    {% for category in all_categories %}
+    <section class="col category">
+        <h1 class="category-title">{{ category.name }}<br></h1>
+
+        <table class="table table">
+            <tbody>
+                {% for product in all_products %}
+                {% if product.category_id == category.id %}
+                <tr>
+                    <td class="img"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
+                    <td class="name">{{ product.name }}<br />{{ product.price }} <small>CEDI per bowl</small></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+    {% endfor %}
+</div>
+<div class="text-center">
+    <a href="/market-leader">For market leader</a>
+</div>
+{% endblock %}
