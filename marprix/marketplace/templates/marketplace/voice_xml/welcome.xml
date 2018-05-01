@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vxml version = "2.1" >
+<vxml xmlns="http://www.w3.org/2001/vxml" version="2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/2007/REC-voicexml21-20070619/vxml.xsd">
     <menu id="menu1" dtmf="true">
         <prompt>
             <audio src="https://django-static.vps.abaart.nl/group2/django/wav/Product%20categories%20ENG.wav"/>
         </prompt>
-            <choice next="IDs"/>
-            <choice next="categories"/>
-        </menu>
-
-    </vxml>
+        <choice next="IDs"/>
+        <choice next="categories"/>
+    </menu>
+</vxml>
