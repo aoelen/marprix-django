@@ -1,0 +1,40 @@
+*{
+	font-family: 'Open Sans', sans-serif;
+}
+header img{
+	width: 150px;
+	padding-bottom: 30px;
+}
+footer{
+	text-align: center;
+	color: #434343;
+	font-size: 12px;
+}
+.category-title{
+	text-align: center;
+	font-size: 26px;
+	color: #649c35bd;
+}
+.category-title small{
+	color: #737373;
+	font-size: 12px;
+}
+table .img {
+	width:70px;
+}
+table .name {
+
+}
+.product-price {
+	text-align: center;
+	padding: 6px;
+	font-size: 18px;
+}
+.delete {
+	color:#e66363;
+	font-size:14px;
+	cursor:pointer;
+}
+#templates {
+	display: none;
+}

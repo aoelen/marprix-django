@@ -25,10 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&s#hd3&pg4i#*g*59m)nh_2!%^iw0_xqt(z+fyxju99j3b99hf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -75,14 +74,7 @@ WSGI_APPLICATION = 'marprix.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}'''
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -92,11 +84,8 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': ''
     }
-}'''
-
-DATABASES = {
-    "default": dj_database_url.config()
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -144,3 +133,26 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+try:
+    SFTP_PASS =  os.environ['SFTP_PASS']
+    SFTP_USER = os.environ['SFTP_USER']
+    HEROKU =os.environ['HEROKU']
+    SFTP_HOST = os.environ['SFTP_HOST']
+    SFTP_PORT = os.environ['SFTP_PORT']
+
+except KeyError:
+    SFTP_PASS = ""
+    SFTP_USER = ""
+    HEROKU = False
+    SFTP_HOST = ""
+    SFTP_PORT = ""
+
+if HEROKU:
+    DEBUG = False
+
+    DATABASES = {
+        "default": dj_database_url.config()
+    }
+
+    STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
