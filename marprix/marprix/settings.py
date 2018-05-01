@@ -151,8 +151,45 @@ except KeyError:
 if HEROKU:
     DEBUG = False
 
-    DATABASES = {
+    '''DATABASES = {
         "default": dj_database_url.config()
     }
 
     STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
+    STATICFILES_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'''
+
+    SFTP_STORAGE_HOST = SFTP_HOST
+    SFTP_STORAGE_ROOT = '/django/'
+    SFTP_STORAGE_PARAMS = {
+            'port': SFTP_PORT,
+            'username': SFTP_USER,
+            'password': SFTP_PASS,
+            'allow_agent': False,
+            'look_for_keys': False,
+            }
+    STATICFILES_LOCATION = SFTP_STORAGE_HOST + '/static/'
+    MEDIAFILES_LOCATION = SFTP_STORAGE_HOST + '/media/'
+    DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
+    STATICFILES_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
+    STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
+    MEDIA_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
+
+    DATABASES = {
+        "default": dj_database_url.config()
+    }
+    
+    '''DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'this is not a correct database',
+            'USER': 'this is not a corret user',
+            'PASSWORD': 'this is not a correct password (probably)',
+            'HOST': 'localhost',
+            'PORT':'',
+        }
+    }
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)'''
+else:
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
