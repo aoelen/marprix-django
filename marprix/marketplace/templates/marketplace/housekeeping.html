@@ -2,6 +2,20 @@
 {% load static %}
 
 {% block content %}
+
+<div id="templates">
+    <div>
+        <table>
+            <tr class="product">
+                <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}Unknown.png'></td>
+                <td class="name"><span data-placeholder="name"></span><div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                    <input type="number" class="form-control product-price" value="0">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 <div class="container">
 <div class="alert alert-success">
   <strong>Success!</strong> The product prices are saved successfully
@@ -20,15 +34,21 @@
                 {% if product.category_id == category.id %}
                 <tr>
                     <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
-                    <td class="name">{{ product.name }}<input type="number" class="form-control product-price" name="price-1" value="{{ product.price }}"></td>
+                    <td class="name">{{ product.name }} <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                        <input type="number" class="form-control product-price" name="price-1" value="{{ product.price }}">
+                    </td>
                 </tr>
                 {% endif %}
                 {% endfor %}
-                <tr>
-                    <td></td><td><button class="save btn btn-sm btn-outline-secondary"><i class="fas fa-plus"></i> Add</button></td>
-                </tr>
+
+
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td><td><button class="save btn btn-sm btn-outline-secondary addProduct"><i class="fas fa-plus"></i> Add</button></td>
+                </tr>
+            </tfoot>
         </table>
 
     </section>
@@ -44,4 +64,5 @@
         <a href="/">Back to overview</a>
     </div>
 
+<script src="{% static "marketplace/js/housekeeping.js" %}"></script>
 {% endblock %}

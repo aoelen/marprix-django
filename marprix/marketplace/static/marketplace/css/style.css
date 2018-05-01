@@ -30,3 +30,11 @@ table .name {
 	padding: 6px;
 	font-size: 18px;
 }
+.delete {
+	color:#e66363;
+	font-size:14px;
+	cursor:pointer;
+}
+#templates {
+	display: none;
+}
