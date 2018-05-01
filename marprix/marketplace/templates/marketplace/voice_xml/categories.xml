@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >
+    <menu id="menu1" dtmf="true">
+        <prompt>
+            <break time="1s"/>
+            {% for category in all_categories %}
+            For {{ category.name }} press {{ forloop.counter }}
+            {% endfor %}
+        </prompt>
+        {% for category in all_categories %}
+        <choice next="choose_category/{{ category.id }}"/>
+        {% endfor %}
+
+    </menu>
+</vxml>
