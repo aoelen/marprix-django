@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import dj_database_url
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -134,6 +133,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+# This settings file is based on: https://github.com/abaart/KasaDaka-VSDK/blob/master/vsdk/settings.py
 try:
     SFTP_PASS =  os.environ['SFTP_PASS']
     SFTP_USER = os.environ['SFTP_USER']
@@ -150,13 +150,6 @@ except KeyError:
 
 if HEROKU:
     DEBUG = False
-
-    '''DATABASES = {
-        "default": dj_database_url.config()
-    }
-
-    STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
-    STATICFILES_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'''
 
     SFTP_STORAGE_HOST = SFTP_HOST
     SFTP_STORAGE_ROOT = '/django/'
@@ -177,17 +170,3 @@ if HEROKU:
     DATABASES = {
         "default": dj_database_url.config()
     }
-
-    '''DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'this is not a correct database',
-            'USER': 'this is not a corret user',
-            'PASSWORD': 'this is not a correct password (probably)',
-            'HOST': 'localhost',
-            'PORT':'',
-        }
-    }
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)'''

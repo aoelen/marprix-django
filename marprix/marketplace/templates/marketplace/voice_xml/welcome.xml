@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version = "2.1" >
     <menu id="menu1" dtmf="true">
-        <prompt>Welcome to MarPrix. This service allows to retrieve the latest market prices.
-            If you know the product ID you want to know the price off, press 1.
-            Otherwise, Please press 2 to go to product categories.</prompt>
+        <prompt>
+            <audio src="https://django-static.vps.abaart.nl/group2/django/wav/Product%20categories%20ENG.wav"/>
+        </prompt>
             <choice next="IDs"/>
             <choice next="categories"/>
         </menu>
