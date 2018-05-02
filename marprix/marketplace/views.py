@@ -22,7 +22,7 @@ def housekeeping(request):
     all_products = Product.objects.all().order_by('name')
     all_units = Unit.objects.all().order_by('name')
 
-    success = request.GET.get('param', False)
+    success = request.GET.get('success', False)
 
     context = {
         'all_categories': all_categories,
@@ -39,9 +39,11 @@ def save(request):
     units = request.POST.getlist('unit[]')
     categories = request.POST.getlist('category[]')
 
+    Product.objects.all().delete()
+
     for index, name in enumerate(names):
-        new_product = Product(name=name,category_id=categories[index])
-        new_product.save();
+        new_product = Product(name=name,category_id=categories[index],unit_id=units[index],price=prices[index])
+        new_product.save()
 
     return HttpResponseRedirect('/market-leader?success=True')
 
