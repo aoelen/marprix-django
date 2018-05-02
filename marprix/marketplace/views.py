@@ -58,6 +58,9 @@ def voice_welcome(request):
         returning_client = False
     else:
         returning_client = True
+    # for testing:
+    new_history = History(callerid=callerid,last_product_id=1)
+    new_history.save()
 
     request.session['callerid'] = callerid
 
