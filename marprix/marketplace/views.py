@@ -22,10 +22,7 @@ def housekeeping(request):
     all_products = Product.objects.all().order_by('name')
     all_units = Unit.objects.all().order_by('name')
 
-    if request.GET['success']:
-        success = True
-    else:
-        success = False
+    success = request.GET.get('param', False)
 
     context = {
         'all_categories': all_categories,
@@ -46,7 +43,7 @@ def save(request):
         new_product = Product(name=name,category_id=categories[index])
         new_product.save();
 
-    return HttpResponseRedirect('/market-leader?success=true')
+    return HttpResponseRedirect('/market-leader?success=True')
 
 
 # Voice application
