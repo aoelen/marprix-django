@@ -1,7 +1,7 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
 
 {% block content %}
-<menu id="form-fruit" dtmf="true">
+<menu id="intro" dtmf="true">
     <prompt>
         <break time="1s"/>
         {% for product in selected_products %}
@@ -11,14 +11,14 @@
         if you'd like to retrieve prices using a product ID, Press something.
     </prompt>
     {% for product in selected_products %}
-    <choice next="#{{ product.id }}"/>
+    <choice next="#product{{ product.id }}"/>
     {% endfor %}
     <choice next="categories"/>
     <choice next="IDs"/>
 </menu>
 
 {% for product in selected_products %}
-<menu id="{{ product.id }}" dtmf="true">
+<menu id="product{{ product.id }}" dtmf="true">
     <prompt>
         <break time="1s"/>
         Price of {{ product.name }} is: {{ product.price }}
