@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Product, Category
+from .models import Product, Category, Unit
 # Create your views here.
 
 def index(request):
@@ -20,10 +20,12 @@ def housekeeping(request):
 
     all_categories = Category.objects.all().order_by('sort');
     all_products = Product.objects.all().order_by('name');
+    all_units = Unit.objects.all().order_by('name');
 
     context = {
         'all_categories': all_categories,
-        'all_products' : all_products
+        'all_products' : all_products,
+        'all_units': all_units
     }
 
     return render(request, 'marketplace/housekeeping.html', context)

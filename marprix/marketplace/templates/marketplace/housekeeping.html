@@ -9,7 +9,13 @@
             <tr class="product">
                 <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}Unknown.png'></td>
                 <td class="name"><span data-placeholder="name"></span><div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
-                    <input type="number" class="form-control product-price" value="0">
+                    <input type="number" class="form-control product-price w-50 float-left" name="price-1" value="{{ product.price }}">
+
+                    <select class="form-control product-price w-50 float-left">
+                        {% for unit in all_units %}
+                        <option>{{ unit.name }}</option>
+                        {% endfor %}
+                    </select>
                 </td>
             </tr>
         </table>
@@ -34,8 +40,15 @@
                 {% if product.category_id == category.id %}
                 <tr>
                     <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
-                    <td class="name">{{ product.name }} <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
-                        <input type="number" class="form-control product-price" name="price-1" value="{{ product.price }}">
+                    <td class="name"><span>{{ product.name }}</span> <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                        <input type="number" class="form-control product-price w-50 float-left" name="price-1" value="{{ product.price }}">
+
+                        <select class="form-control product-price w-50 float-left">
+                            {% for unit in all_units %}
+                            <option>{{ unit.name }}</option>
+                            {% endfor %}
+                        </select>
+
                     </td>
                 </tr>
                 {% endif %}
