@@ -10,5 +10,5 @@ urlpatterns = [
     path('VXML/welcome', views.voice_welcome, name='voice_welcome'),
     path('VXML/categories', views.voice_categories, name='voice_categories'),
     path('VXML/IDs', views.ids, name='ids'),
-    path('VXML/products', views.products, name='products')
+    path('VXML/products/<int:category_id>', views.products, name='products')
 ]

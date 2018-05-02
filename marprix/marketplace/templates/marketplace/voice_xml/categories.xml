@@ -9,7 +9,7 @@
         {% endfor %}
     </prompt>
     {% for category in all_categories %}
-    <choice next="products?category_id={{ category.id }}"/>
+    <choice next="products/{{ category.id }}"/>
     {% endfor %}
 
 </menu>
