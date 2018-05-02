@@ -8,7 +8,8 @@
         <table>
             <tr class="product">
                 <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}Unknown.png'></td>
-                <td class="name"><span data-placeholder="name"></span><div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                <td class="name"><span class="float-left" data-placeholder="name"></span><div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                    <div class="clearfix"></div>
                     <input type="number" class="form-control product-price w-50 float-left" name="price-1" value="{{ product.price }}">
 
                     <select class="form-control product-price w-50 float-left">
@@ -22,17 +23,20 @@
     </div>
 </div>
 
+<form action="{% url 'marketplace:save' %}" method="post">
+{% csrf_token %}
 <div class="container">
+    {% if success %}
 <div class="alert alert-success">
   <strong>Success!</strong> The product prices are saved successfully
 </div>
-<form action="{% url 'marketplace:save' %}" method="post">
-{% csrf_token %}
+{% endif %}
+
 <div class="row">
 
     {% for category in all_categories %}
     <section class="col category">
-        <h1 class="category-title">{{ category.name }}<br><small>Price (CEDI per bowl)</small></h1>
+        <h1 class="category-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
 
         <table class="table table">
             <tbody>
@@ -40,12 +44,15 @@
                 {% if product.category_id == category.id %}
                 <tr>
                     <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
-                    <td class="name"><span>{{ product.name }}</span> <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
-                        <input type="number" class="form-control product-price w-50 float-left" name="price-1" value="{{ product.price }}">
+                    <td class="name"><span class="float-left">{{ product.name }}</span> <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" name="name[]" value="{{ product.name }}">
+                        <input type="hidden" name="category[]" value="{{ product.category_id }}">
+                        <input type="number" class="form-control product-price w-50 float-left" name="price[]" value="{{ product.price }}">
 
-                        <select class="form-control product-price w-50 float-left">
+                        <select class="form-control product-price w-50 float-left" name="unit[]">
                             {% for unit in all_units %}
-                            <option>{{ unit.name }}</option>
+                            <option value="{{ unit.id }}">{{ unit.name }}</option>
                             {% endfor %}
                         </select>
 
@@ -65,14 +72,14 @@
     {% endfor %}
 
 </div>
-</form>
+
 </div>
     <div class="container text-center">
-        <button formaction="updateveg.php" class="save btn btn-lg btn-outline-success" formtarget="votar" type="submit"><i class="fas fa-save"></i> Save changes</button>
+        <button type="submit" class="save btn btn-lg btn-outline-success"><i class="fas fa-save"></i> Save changes</button>
     </div>
     <div class="container text-center mt-3 ">
         <a href="/">Back to overview</a>
     </div>
-
+</form>
 <script src="{% static "marketplace/js/housekeeping.js" %}"></script>
 {% endblock %}

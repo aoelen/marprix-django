@@ -1,0 +1,37 @@
+{% extends 'marketplace/voice_xml/layout.xml' %}
+
+{% block content %}
+<menu id="form-ID-retreival">
+    <property name="inputmodes" value="dtmf"/>
+    <prompt>
+        <break time="1s"/>
+        <!--Please enter your product number: -->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/IDs/Enter%20product%20number%20ENG.wav"/>
+    </prompt>
+    {% for product in all_products %}
+    <choice dtmf="{{ product.id }}" next="#ID{{ product.id }}"/>
+    {% endfor %}
+</menu>
+
+{% for product in all_products %}
+<menu id="ID{{ product.id }}" dtmf="true">
+    <prompt>
+        <break time="1s"/>
+        <!-- The price of {{ product.name }} is: -->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/product/{{ product.name }}.wav"/>
+        <!-- {{ product.price }} -->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/number/{{ product.price }}.wav"/>
+        <break time="0.5s"/>
+       <audio src="https://django-static.vps.abaart.nl/group2/django/wav/unit/{{ product.unit.name }}.wav"/>
+        <break time="1s"/>
+        <!-- If you want to enter another product ID, press 1.
+        If you want to know the price of other products but you dont know the ID, press 2.
+        Otherwise you may end the call. -->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/IDs/Keuze%20na%20productnummer%20invoeren%20ENG.wav"/>
+    </prompt>
+    <choice next="#form-ID-retreival"/>
+    <choice next="categories"/>
+</menu>
+{% endfor %}
+
+{% endblock %}

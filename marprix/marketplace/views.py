@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 
 from .models import Product, Category, Unit
 # Create your views here.
@@ -18,20 +18,36 @@ def index(request):
 
 def housekeeping(request):
 
-    all_categories = Category.objects.all().order_by('sort');
-    all_products = Product.objects.all().order_by('name');
-    all_units = Unit.objects.all().order_by('name');
+    all_categories = Category.objects.all().order_by('sort')
+    all_products = Product.objects.all().order_by('name')
+    all_units = Unit.objects.all().order_by('name')
+
+    if request.GET['success']:
+        success = True
+    else:
+        success = False
 
     context = {
         'all_categories': all_categories,
         'all_products' : all_products,
-        'all_units': all_units
+        'all_units': all_units,
+        'success': success
     }
 
     return render(request, 'marketplace/housekeeping.html', context)
 
 def save(request):
-    a=1+1
+    names = request.POST.getlist('name[]')
+    prices = request.POST.getlist('price[]')
+    units = request.POST.getlist('unit[]')
+    categories = request.POST.getlist('category[]')
+
+    for index, name in enumerate(names):
+        new_product = Product(name=name,category_id=categories[index])
+        new_product.save();
+
+    return HttpResponseRedirect('/market-leader?success=true')
+
 
 # Voice application
 
