@@ -13,26 +13,23 @@
     {% for product in selected_products %}
     <choice next="#product{{ product.id }}"/>
     {% endfor %}
-    <choice next="categories"/>
-    <choice next="IDs"/>
+    <choice next="../categories"/>
+    <choice next="../IDs"/>
 </menu>
 
 {% for product in selected_products %}
 <menu id="product{{ product.id }}" dtmf="true">
     <prompt>
         <break time="1s"/>
-        Price of {{ product.name }} is: {{ product.price }}
+        Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.
 
-        <break time="0.5s"/>
-        CEDI per bowl.
-        <break time="1s"/>
         Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
         Press 3 if youd like to retrieve prices using a product ID.
     </prompt>
     <choice next="#intro"/>
-    <choice next="categories"/>
-    <choice next="IDs"/>
+    <choice next="../categories"/>
+    <choice next="../IDs"/>
 </menu>
 {% endfor %}
 
