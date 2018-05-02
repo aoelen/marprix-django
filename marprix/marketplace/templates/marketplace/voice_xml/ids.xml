@@ -25,7 +25,7 @@
         Otherwise you may end the call.
     </prompt>
     <choice next="#form-ID-retreival"/>
-    <choice next="categories.php"/>
+    <choice next="categories"/>
 </menu>
 {% endfor %}
 

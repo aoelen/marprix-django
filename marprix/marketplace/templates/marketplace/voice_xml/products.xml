@@ -1,0 +1,39 @@
+{% extends 'marketplace/voice_xml/layout.xml' %}
+
+{% block content %}
+<menu id="form-fruit" dtmf="true">
+    <prompt>
+        <break time="1s"/>
+        {% for product in selected_products %}
+        For {{ product.name }} press {{ forloop.counter }}
+        {% endfor %}
+        If you want to select another category, press something.
+        if you'd like to retrieve prices using a product ID, Press something.
+    </prompt>
+    {% for product in selected_products %}
+    <choice next="#{{ product.id }}"/>
+    {% endfor %}
+    <choice next="categories"/>
+    <choice next="IDs"/>
+</menu>
+
+{% for product in selected_products %}
+<menu id="{{ product.id }}" dtmf="true">
+    <prompt>
+        <break time="1s"/>
+        Price of {{ product.name }} is: {{ product.price }}
+
+        <break time="0.5s"/>
+        CEDI per bowl.
+        <break time="1s"/>
+        Press 1 if you'd like to retrieve other prices in this category.
+        Press 2 if you'd like to retrieve prices from other categories.
+        Press 3 if you'd like to retrieve prices using a product ID.
+    </prompt>
+    <choice next="#form-fruit"/>
+    <choice next="categories"/>
+    <choice next="IDs"/>
+</menu>
+{% endfor %}
+
+{% endblock %}

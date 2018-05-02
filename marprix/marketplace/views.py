@@ -53,3 +53,13 @@ def ids(request):
     }
 
     return render(request, 'marketplace/voice_xml/ids.xml', context, content_type="application/xhtml+xml")
+
+def products(request):
+    category_id = request.GET['category_id']
+    selected_products = Product.objects.all().filter(category_id=category_id).order_by('name');
+
+    context = {
+        'selected_products': selected_products
+    }
+
+    return render(request, 'marketplace/voice_xml/products.xml', context, content_type="application/xhtml+xml")

@@ -9,5 +9,6 @@ urlpatterns = [
     path('save', views.save, name='save'),
     path('VXML/welcome', views.voice_welcome, name='voice_welcome'),
     path('VXML/categories', views.voice_categories, name='voice_categories'),
-    path('VXML/IDs', views.ids, name='ids')
+    path('VXML/IDs', views.ids, name='ids'),
+    path('VXML/products', views.products, name='products')
 ]
