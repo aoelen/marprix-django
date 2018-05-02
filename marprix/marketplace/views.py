@@ -7,7 +7,7 @@ from .models import Product, Category
 def index(request):
     #return HttpResponse('HELLO TO MARKET LEADER')
     all_categories = Category.objects.all().order_by('sort');
-    all_products = Product.objects.all().order_by('name');
+    all_products = Product.objects.select_related('unit').all().order_by('name');
 
     context = {
         'all_categories': all_categories,
