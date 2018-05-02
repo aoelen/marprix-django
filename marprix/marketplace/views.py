@@ -44,3 +44,12 @@ def voice_categories(request):
     }
 
     return render(request, 'marketplace/voice_xml/categories.xml', context, content_type="application/xhtml+xml")
+
+def ids(request):
+    all_products = Product.objects.all().order_by('id');
+
+    context = {
+        'all_products': all_products,
+    }
+
+    return render(request, 'marketplace/voice_xml/ids.xml', context, content_type="application/xhtml+xml")

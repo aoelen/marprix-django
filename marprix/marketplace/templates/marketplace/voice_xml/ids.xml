@@ -1,0 +1,32 @@
+{% extends 'marketplace/voice_xml/layout.xml' %}
+
+{% block content %}
+<menu id="form-ID-retreival">
+    <property name="inputmodes" value="dtmf"/>
+    <prompt>
+        <break time="1s"/>
+        Please enter your product ID:
+    </prompt>
+    {% for product in all_products %}
+    <choice dtmf="{{ product.id }}" next="#ID{{ product.id }}"/>
+    {% endfor %}
+</menu>
+
+{% for product in all_products %}
+<menu id="ID{{ product.id }}" dtmf="true">
+    <prompt>
+        <break time="1s"/>
+        The price of {{ product.name }} is: {{ product.price }}
+        <break time="0.5s"/>
+        CEDI per bowl.
+        <break time="1s"/>
+        If you want to enter another product ID, press 1.
+        If you want to know the price of other products but you dont know the ID, press 2.
+        Otherwise you may end the call.
+    </prompt>
+    <choice next="#form-ID-retreival"/>
+    <choice next="categories.php"/>
+</menu>
+{% endfor %}
+
+{% endblock %}
