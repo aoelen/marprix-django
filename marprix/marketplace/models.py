@@ -24,3 +24,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class History(models.Model):
+    callerid = models.CharField(max_length=255)
+    last_product = models.ForeignKey(Product, on_delete=models.CASCADE)

@@ -7,8 +7,8 @@
         {% for product in selected_products %}
         For {{ product.name }} press {{ forloop.counter }}
         {% endfor %}
-        If you want to select another category, press something.
-        if youd like to retrieve prices using a product ID, Press something.
+        If you want to select another category, press {{ selected_products|length|add:1 }}.
+        if youd like to retrieve prices using a product ID, Press {{ selected_products|length|add:2 }}.
     </prompt>
     {% for product in selected_products %}
     <choice next="#product{{ product.id }}"/>

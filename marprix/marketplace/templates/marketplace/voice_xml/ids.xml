@@ -21,9 +21,7 @@
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/product/{{ product.name }}.wav"/>
         <!-- {{ product.price }} -->
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/number/{{ product.price }}.wav"/>
-        <break time="0.5s"/>
-       <audio src="https://django-static.vps.abaart.nl/group2/django/wav/unit/{{ product.unit.name }}.wav"/>
-        <break time="1s"/>
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/unit/{{ product.unit.name }}.wav"/>
         <!-- If you want to enter another product ID, press 1.
         If you want to know the price of other products but you dont know the ID, press 2.
         Otherwise you may end the call. -->

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 
-from .models import Product, Category, Unit
+from .models import Product, Category, Unit, History
 # Create your views here.
 
 def index(request):
@@ -51,7 +51,21 @@ def save(request):
 # Voice application
 
 def voice_welcome(request):
-    return render(request, 'marketplace/voice_xml/welcome.xml', content_type="application/xhtml+xml")
+    callerid = request.GET["callerid"]
+    caller_has_history = History.objects.all().filter(callerid=callerid)
+
+    if (caller_has_history.count() == 0):
+        returning_client = False
+    else:
+        returning_client = True
+
+    request.session['callerid'] = callerid
+
+    context = {
+        'returning_client': returning_client
+    }
+
+    return render(request, 'marketplace/voice_xml/welcome.xml', context, content_type="application/xhtml+xml")
 
 def voice_categories(request):
     all_categories = Category.objects.all().order_by('sort');
@@ -73,7 +87,10 @@ def ids(request):
 
 def products(request, category_id):
     selected_products = Product.objects.all().filter(category_id=category_id).order_by('name');
-
+    '''callerid = request.session.get('callerid', 0)
+    new_history = History(callerid=callerid,last_product_id=163)
+    new_history.save()
+    '''
     context = {
         'selected_products': selected_products
     }
