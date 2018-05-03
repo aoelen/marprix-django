@@ -95,7 +95,8 @@ def products(request, category_id):
     new_history.save()
     '''
     context = {
-        'selected_products': selected_products
+        'selected_products': selected_products,
+        'category_id': category_id
     }
 
     return render(request, 'marketplace/voice_xml/products.xml', context, content_type="application/xhtml+xml")

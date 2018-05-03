@@ -4,11 +4,12 @@
 <menu id="intro" dtmf="true">
     <prompt>
         <break time="1s"/>
-        {% for product in selected_products %}
+        <!--{% for product in selected_products %}
         For {{ product.name }} press {{ forloop.counter }}
         {% endfor %}
         If you want to select another category, press {{ selected_products|length|add:1 }}.
-        if youd like to retrieve prices using a product ID, Press {{ selected_products|length|add:2 }}.
+        if youd like to retrieve prices using a product ID, Press {{ selected_products|length|add:2 }}.-->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/category{{ category_id }}.wav"/>
     </prompt>
     {% for product in selected_products %}
     <choice next="#product{{ product.id }}"/>
@@ -21,11 +22,16 @@
 <menu id="product{{ product.id }}" dtmf="true">
     <prompt>
         <break time="1s"/>
-        Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.
+        <!--Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.
 
         Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
-        Press 3 if youd like to retrieve prices using a product ID.
+        Press 3 if youd like to retrieve prices using a product ID-->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/product/{{ product.name }}.wav"/>
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/number/{{ product.price }}.wav"/>
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/unit/{{ product.unit.name }}.wav"/>
+
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/endofproductincategories.wav"/>
     </prompt>
     <choice next="#intro"/>
     <choice next="../categories"/>
