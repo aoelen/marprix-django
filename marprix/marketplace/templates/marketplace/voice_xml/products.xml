@@ -12,12 +12,13 @@
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/category{{ category_id }}.wav"/>
     </prompt>
     {% for product in selected_products %}
-    <choice next="#product{{ product.id }}"/><!--../select_product/{{ product.id }}-->
+    <choice next="../select_product/{{ product.id }}"/><!--../select_product/{{ product.id }}     #product{{ product.id }}-->
     {% endfor %}
     <choice next="../categories"/>
     <choice next="../IDs"/>
 </menu>
 
+<!--
 {% for product in selected_products %}
 <menu id="product{{ product.id }}" dtmf="true">
     <prompt>
@@ -40,5 +41,6 @@
     <choice next="../IDs"/>
 </menu>
 {% endfor %}
+-->
 
 {% endblock %}

@@ -47,7 +47,7 @@ def save(request):
 
     return HttpResponseRedirect('/market-leader?success=True')
 
-def save_history(product_id):
+def save_history(request, product_id):
     callerid = request.session.get('callerid', 0)
     new_history = History(callerid=callerid,last_product_id=product_id)
     new_history.save()
@@ -105,6 +105,8 @@ def products(request, category_id):
 
 def select_product(request, product_id):
     product = Product.objects.get(id=product_id);
+
+    save_history(request, product_id)
 
     context = {
         'product': product
