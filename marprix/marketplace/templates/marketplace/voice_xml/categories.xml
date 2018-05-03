@@ -4,9 +4,11 @@
 <menu id="menu1" dtmf="true">
     <prompt>
         <break time="1s"/>
-        {% for category in all_categories %}
+        <!--{% for category in all_categories %}
         For {{ category.name }} press {{ forloop.counter }}
-        {% endfor %}
+        {% endfor %}-->
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/categories.wav"/>
+
     </prompt>
     {% for category in all_categories %}
     <choice next="products/{{ category.id }}"/>

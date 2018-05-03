@@ -3,7 +3,7 @@
 {% block content %}
 <menu id="menu1" dtmf="true">
     <prompt>
-        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/Welcome/Welcome%20ENG.wav"/>
+        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/welcome/welcome.wav"/>
         <!-- Welcome to MarPrix. This service allows to retrieve the latest market prices. If you know the product ID you want to know the price off, press 1. Otherwise, Please press 2 to go to product categories.-->
         {% if returning_client %}
         <!-- RETURNING CUSTOMER: TODO Welcome back to marprice etc, select 3 to retrieve the last product -->
