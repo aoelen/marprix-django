@@ -142,11 +142,14 @@ try:
     SFTP_PORT = os.environ['SFTP_PORT']
 
 except KeyError:
+    # Some hardcoded variables for local testing
     SFTP_PASS = ""
-    SFTP_USER = ""
+    SFTP_USER = "group2"
     HEROKU = False
-    SFTP_HOST = ""
+    SFTP_HOST = "django-static.vps.abaart.nl"
     SFTP_PORT = ""
+
+STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
 
 if HEROKU:
     DEBUG = False
@@ -164,7 +167,6 @@ if HEROKU:
     MEDIAFILES_LOCATION = SFTP_STORAGE_HOST + '/media/'
     DEFAULT_FILE_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
     STATICFILES_STORAGE = 'storages.backends.sftpstorage.SFTPStorage'
-    STATIC_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
     MEDIA_URL = "http://" + SFTP_HOST + "/" + SFTP_USER + "/django/"
 
     DATABASES = {
