@@ -47,6 +47,10 @@ def save(request):
 
     return HttpResponseRedirect('/market-leader?success=True')
 
+def save_history(product_id):
+    callerid = request.session.get('callerid', 0)
+    new_history = History(callerid=callerid,last_product_id=product_id)
+    new_history.save()
 
 # Voice application
 
@@ -54,13 +58,11 @@ def voice_welcome(request):
     callerid = request.GET["callerid"]
     caller_has_history = History.objects.all().filter(callerid=callerid)
 
+    # Is the caller an returning client?
     if (caller_has_history.count() == 0):
         returning_client = False
     else:
         returning_client = True
-    # for testing:
-    new_history = History(callerid=callerid,last_product_id=1)
-    new_history.save()
 
     request.session['callerid'] = callerid
 
@@ -100,3 +102,22 @@ def products(request, category_id):
     }
 
     return render(request, 'marketplace/voice_xml/products.xml', context, content_type="application/xhtml+xml")
+
+def select_product(request, product_id):
+    product = Product.objects.get(id=product_id);
+
+    context = {
+        'product': product
+    }
+
+    return render(request, 'marketplace/voice_xml/select_product.xml', context, content_type="application/xhtml+xml")
+
+def test_history(request):
+    new_history = History(callerid='00',last_product_id=163)
+    new_history.save()
+
+    context = {
+        'returning_client': False
+    }
+
+    return render(request, 'marketplace/voice_xml/welcome.xml', context, content_type="application/xhtml+xml")
