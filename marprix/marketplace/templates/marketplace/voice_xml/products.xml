@@ -4,18 +4,25 @@
 <menu id="intro" dtmf="true">
     <prompt>
         <break time="1s"/>
-        <!--{% for product in selected_products %}
-        For {{ product.name }} press {{ forloop.counter }}
+        {% for product in selected_products %}
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/for.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/products/{{ product.name }}.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/press.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/{{ forloop.counter }}.wav"/>
         {% endfor %}
-        If you want to select another category, press {{ selected_products|length|add:1 }}.
-        if youd like to retrieve prices using a product ID, Press {{ selected_products|length|add:2 }}.-->
-        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/category{{ category_id }}.wav"/>
+
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/othercategory.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/{{ selected_products|length|add:1 }}.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/othernumber.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/0.wav"/>
+
+        <!--<audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/category{{ category_id }}.wav"/>-->
     </prompt>
     {% for product in selected_products %}
     <choice next="../select_product/{{ product.id }}"/><!--../select_product/{{ product.id }}     #product{{ product.id }}-->
     {% endfor %}
     <choice next="../categories"/>
-    <choice next="../IDs"/>
+    <choice dtmf="0" next="../IDs"/>
 </menu>
 
 <!--

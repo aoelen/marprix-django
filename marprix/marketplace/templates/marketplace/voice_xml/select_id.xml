@@ -1,20 +1,7 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
 
 {% block content %}
-<menu id="form-ID-retreival">
-    <property name="inputmodes" value="dtmf"/>
-    <prompt>
-        <break time="1s"/>
-        <!--Please enter your product number: -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/welcomeids.wav"/>
 
-    </prompt>
-    {% for product in all_products %}
-    <choice dtmf="{{ product.id }}" next="select_id/{{ product.id }}"/>
-    {% endfor %}
-</menu>
-<!--
-{% for product in all_products %}
 <menu id="ID{{ product.id }}" dtmf="true">
     <prompt>
         <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/thepriceof.wav"/>
@@ -24,10 +11,9 @@
         <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/units/{{ product.unit.name }}.wav"/>
 
         <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/endmenu.wav"/>
-            </prompt>
-    <choice next="#form-ID-retreival"/>
-    <choice next="categories" dtmf="0"/>
+    </prompt>
+    <choice next="../ids"/>
+    <choice next="../categories" dtmf="0"/>
 </menu>
-{% endfor %}-->
 
 {% endblock %}

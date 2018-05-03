@@ -114,6 +114,18 @@ def select_product(request, product_id):
 
     return render(request, 'marketplace/voice_xml/select_product.xml', context, content_type="application/xhtml+xml")
 
+def select_id(request, product_id):
+    product = Product.objects.get(id=product_id);
+
+    save_history(request, product_id)
+
+    context = {
+        'product': product
+    }
+
+    return render(request, 'marketplace/voice_xml/select_id.xml', context, content_type="application/xhtml+xml")
+
+
 def history(request):
     callerid = request.session.get('callerid', 0)
     history = History.objects.all().filter(callerid=callerid).order_by('-id')

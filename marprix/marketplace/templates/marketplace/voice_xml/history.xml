@@ -15,7 +15,7 @@
         <!--Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
         Press 3 if youd like to retrieve prices using a product ID-->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/wav/ENG/endofproductincategories.wav"/>
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/history/endhistory.wav"/>
     </prompt>
     <choice next="products/{{ product.category_id }}"/>
     <choice next="categories"/>
