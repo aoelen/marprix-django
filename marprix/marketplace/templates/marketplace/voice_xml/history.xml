@@ -4,19 +4,19 @@
 <menu id="product{{ product.id }}" dtmf="true">
     <prompt>
         <break time="1s"/>
-        <!--Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.
 
-        Press 1 if youd like to retrieve other prices in this category.
-        Press 2 if youd like to retrieve prices from other categories.
-        Press 3 if youd like to retrieve prices using a product ID-->
+        <!--Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.-->
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/product/{{ product.name }}.wav"/>
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/number/{{ product.price }}.wav"/>
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/unit/{{ product.unit.name }}.wav"/>
 
+        <!--Press 1 if youd like to retrieve other prices in this category.
+        Press 2 if youd like to retrieve prices from other categories.
+        Press 3 if youd like to retrieve prices using a product ID-->
         <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/endofproductincategories.wav"/>
     </prompt>
-    <choice next="../products/{{ product.category_id }}"/>
-    <choice next="../categories"/>
-    <choice next="../IDs"/>
+    <choice next="products/{{ product.category_id }}"/>
+    <choice next="categories"/>
+    <choice next="IDs"/>
 </menu>
 {% endblock %}

@@ -3,10 +3,19 @@
 {% block content %}
 <menu id="menu1" dtmf="true">
     <prompt>
-        <audio src="https://django-static.vps.abaart.nl/group2/django/wav/ENG/welcome/welcome.wav"/>
-        <!-- Welcome to MarPrix. This service allows to retrieve the latest market prices. If you know the product ID you want to know the price off, press 1. Otherwise, Please press 2 to go to product categories.-->
         {% if returning_client %}
-        <!-- RETURNING CUSTOMER: TODO Welcome back to marprice etc, select 3 to retrieve the last product -->
+        <!-- Welcome back to Marprice -->
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/welcome-back.wav"/>
+        {% else %}
+        <!-- Welcome to Marprice -->
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/welcome.wav"/>
+        {% endif %}
+        <!-- This service allows to retrieve the latest market prices. Please press 1 if you know the product number you want to know the price of Press 2 to go to product categories. -->
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/info.wav"/>
+
+        {% if returning_client %}
+        <!-- Press 3 to retrieve the latest product price you have requested -->
+        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/history.wav"/>
         {% endif %}
     </prompt>
     <choice next="IDs"/>
