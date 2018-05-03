@@ -55,7 +55,7 @@ def save_history(request, product_id):
 # Voice application
 
 def voice_welcome(request):
-    callerid = request.GET["callerid"]
+    callerid = request.GET.get('callerid', 'Unknown')
     caller_has_history = History.objects.all().filter(callerid=callerid)
 
     # Is the caller an returning client?
@@ -114,6 +114,21 @@ def select_product(request, product_id):
 
     return render(request, 'marketplace/voice_xml/select_product.xml', context, content_type="application/xhtml+xml")
 
+def history(request):
+    callerid = request.session.get('callerid', 0)
+    history = History.objects.all().filter(callerid=callerid).order_by('-id')
+    history_product_id = history[0].last_product_id
+    product = Product.objects.get(id=history_product_id)
+
+    context = {
+        'product': product
+    }
+
+    return render(request, 'marketplace/voice_xml/history.xml', context, content_type="application/xhtml+xml")
+
+
+
+'''
 def test_history(request):
     new_history = History(callerid='00',last_product_id=163)
     new_history.save()
@@ -123,3 +138,4 @@ def test_history(request):
     }
 
     return render(request, 'marketplace/voice_xml/welcome.xml', context, content_type="application/xhtml+xml")
+'''

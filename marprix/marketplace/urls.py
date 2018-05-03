@@ -12,5 +12,5 @@ urlpatterns = [
     path('VXML/IDs', views.ids, name='ids'),
     path('VXML/products/<int:category_id>', views.products, name='products'),
     path('VXML/select_product/<int:product_id>', views.select_product, name='select_product'),
-    path('VXML/test_history', views.test_history, name='test_history')
+    path('VXML/history', views.history, name='history')
 ]
