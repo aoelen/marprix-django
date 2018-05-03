@@ -19,6 +19,6 @@
     </prompt>
     <choice next="products/{{ product.category_id }}"/>
     <choice next="categories"/>
-    <choice next="IDs"/>
+    <choice dtmf="0" next="IDs"/>
 </menu>
 {% endblock %}
