@@ -17,8 +17,6 @@
         Press 3 if youd like to retrieve prices using a product ID-->
         <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/history/endhistory.wav"/>
     </prompt>
-    <choice next="products/{{ product.category_id }}"/>
-    <choice next="categories"/>
-    <choice dtmf="0" next="IDs"/>
+    <choice dtmf="0" next="welcome"/>
 </menu>
 {% endblock %}
