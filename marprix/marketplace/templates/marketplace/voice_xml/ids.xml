@@ -1,4 +1,5 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
+{% load static %}
 
 {% block content %}
 <menu id="form-ID-retreival">
@@ -6,27 +7,10 @@
     <property name="interdigittimeout" value="2s"/>
     <prompt>
         <!--Please enter your product number: -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/welcomeids.wav"/>
+        <audio src="{% static "audio/ENG/ids/welcomeids.wav" %}"/>
     </prompt>
     {% for product in all_products %}
     <choice dtmf="{{ product.id }}" next="select_id/{{ product.id }}"/>
     {% endfor %}
 </menu>
-<!--
-{% for product in all_products %}
-<menu id="ID{{ product.id }}" dtmf="true">
-    <prompt>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/thepriceof.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/products/{{ product.name }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/is.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/{{ product.price }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/units/{{ product.unit.name }}.wav"/>
-
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/endmenu.wav"/>
-            </prompt>
-    <choice next="#form-ID-retreival"/>
-    <choice next="categories" dtmf="0"/>
-</menu>
-{% endfor %}-->
-
 {% endblock %}

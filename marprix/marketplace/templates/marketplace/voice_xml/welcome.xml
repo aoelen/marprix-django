@@ -1,21 +1,22 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
+{% load static %}
 
 {% block content %}
 <menu id="menu1" dtmf="true">
     <prompt>
         {% if returning_client %}
         <!-- Welcome back to Marprice -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/welcome-back.wav"/>
+        <audio src="{% static "audio/ENG/welcome/welcome-back.wav" %}"/>
         {% else %}
         <!-- Welcome to Marprice -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/welcome.wav"/>
+        <audio src="{% static "audio/ENG/welcome/welcome.wav" %}"/>
         {% endif %}
         <!-- This service allows to retrieve the latest market prices. Please press 1 if you know the product number you want to know the price of Press 2 to go to product categories. -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/info.wav"/>
+        <audio src="{% static "audio/ENG/welcome/info.wav" %}"/>
 
         {% if returning_client %}
         <!-- Press 3 to retrieve the latest product price you have requested -->
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/welcome/history.wav"/>
+        <audio src="{% static "audio/ENG/welcome/history.wav" %}"/>
         {% endif %}
     </prompt>
     <choice next="IDs"/>

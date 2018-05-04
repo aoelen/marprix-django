@@ -1,4 +1,5 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
+{% load static %}
 
 {% block content %}
 <menu id="product{{ product.id }}" dtmf="true">
@@ -9,14 +10,12 @@
         Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
         Press 3 if youd like to retrieve prices using a product ID-->
-
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/thepriceof.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/products/{{ product.name }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/is.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/{{ product.price }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/units/{{ product.unit.name }}.wav"/>
-
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/endofproductincategories.wav"/>
+        <audio src="{% static "audio/ENG/product/thepriceof.wav" %}"/>
+        <audio src="{% static "audio/ENG/shared/products/" %}{{ product.name }}.wav"/>
+        <audio src="{% static "audio/ENG/product/is.wav" %}"/>
+        <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.price }}.wav"/>
+        <audio src="{% static "audio/ENG/shared/units/" %}{{ product.unit.name }}.wav"/>
+        <audio src="{% static "audio/ENG/product/endofproductincategories.wav" %}"/>
     </prompt>
     <choice next="../products/{{ product.category_id }}"/>
     <choice next="../categories"/>

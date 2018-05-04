@@ -1,16 +1,16 @@
 {% extends 'marketplace/voice_xml/layout.xml' %}
+{% load static %}
 
 {% block content %}
 
 <menu id="ID{{ product.id }}" dtmf="true">
     <prompt>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/thepriceof.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/products/{{ product.name }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/product/is.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/numbers/{{ product.price }}.wav"/>
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/shared/units/{{ product.unit.name }}.wav"/>
-
-        <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/endmenu.wav"/>
+        <audio src="{% static "audio/ENG/product/thepriceof.wav" %}"/>
+        <audio src="{% static "audio/ENG/shared/products/" %}{{ product.name }}.wav"/>
+        <audio src="{% static "audio/ENG/product/is.wav" %}"/>
+        <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.price }}.wav"/>
+        <audio src="{% static "audio/ENG/shared/units/" %}{{ product.unit.name }}.wav"/>
+        <audio src="{% static "audio/ENG/ids/endmenu.wav" %}"/>
     </prompt>
     <choice next="../ids"/>
     <choice next="../categories" dtmf="0"/>
