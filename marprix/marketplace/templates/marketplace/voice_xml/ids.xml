@@ -3,11 +3,10 @@
 {% block content %}
 <menu id="form-ID-retreival">
     <property name="inputmodes" value="dtmf"/>
+    <property name="interdigittimeout" value="2s"/>
     <prompt>
-        <break time="1s"/>
         <!--Please enter your product number: -->
         <audio src="http://django-static.vps.abaart.nl/group2/django/audio/ENG/ids/welcomeids.wav"/>
-
     </prompt>
     {% for product in all_products %}
     <choice dtmf="{{ product.id }}" next="select_id/{{ product.id }}"/>
