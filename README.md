@@ -2,7 +2,7 @@
 
 ![Logo](marprix/marketplace/static/marketplace/img/logo_small.png)
 
-> ** ICT4D Group 2**
+> **ICT4D Group 2**
 > - Mathijs Oggel
 > - Nip van Wees
 > - Tom Tol
