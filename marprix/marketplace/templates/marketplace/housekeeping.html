@@ -27,62 +27,131 @@
 </div>
 
 <form action="{% url 'marketplace:save' %}" method="post">
-{% csrf_token %}
-<div class="container">
-    {% if success %}
-<div class="alert alert-success">
-  <strong>Success!</strong> The product prices are saved successfully
-</div>
-{% endif %}
+    {% csrf_token %}
+    <div class="container">
+        {% if success %}
+        <div class="alert alert-success">
+            <strong>Success!</strong> The product prices are saved successfully
+        </div>
+        {% endif %}
 
-<div class="row">
+        <div class="row">
 
-    {% for category in all_categories %}
-    <section class="col category">
-        <h1 class="category-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
+            {% for category in all_categories %}
+            <section class="col category">
+                <h1 class="category-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
 
-        <table class="table table">
-            <tbody>
-                {% for product in all_products %}
-                {% if product.category_id == category.id %}
-                <tr>
-                    <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
-                    <td class="name"><span class="float-left">{{ product.name }}</span> <div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
-                        <div class="clearfix"></div>
-                        <input type="hidden" name="name[]" value="{{ product.name }}">
-                        <input type="hidden" name="category[]" value="{{ product.category_id }}">
-                        <input type="number" class="form-control product-price w-50 float-left" name="price[]" value="{{ product.price }}">
+                <table class="table table">
+                    <tbody>
+                        {% for product in all_products %}
+                        {% if product.category_id == category.id %}
+                        <tr data-product-id="{{ product.id }}">
+                            <td class="img align-middle"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
+                            <td class="name">
+                                <span class="float-left">{{ product.name }}</span><br> <!--<div class="float-right delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>-->
+                                <div class="float-left edit" data-id="{{ product.id }}" data-toggle="modal" data-target="#productModal"><i class="fas fa-pencil-alt"></i> Edit</div>
+                                <div class="float-left delete deleteProduct"><i class="fas fa-minus-circle"></i> Delete</div>
+                                <div class="clearfix"></div>
 
-                        <select class="form-control product-price w-50 float-left" name="unit[]">
-                            {% for unit in all_units %}
-                            <option value="{{ unit.id }}" {% if product.unit_id == unit.id %}selected="selected"{% endif %}>{{ unit.name }}</option>
-                            {% endfor %}
-                        </select>
+                                <input type="hidden" data-type="id" value="{{ product.id }}">
+                                <input type="hidden" data-type="name" value="{{ product.name }}">
+                                <input type="hidden" data-type="category_id" value="{{ product.category_id }}">
+                                <input type="hidden" data-type="price" value="{{ product.price }}">
+                                <input type="hidden" data-type="unit_id" value="{{ product.unit_id }}">
+                                <input type="hidden" data-type="seller_name" value="{% if product.seller_name %}{{ product.seller_name }}{% endif %}">
+                                <input type="hidden" data-type="seller_location" value="{% if product.seller_name %}{{ product.seller_location }}{% endif %}">
 
-                    </td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td><td><button class="save btn btn-sm btn-outline-secondary addProduct" data-category-id="{{ category.id }}"><i class="fas fa-plus"></i> Add</button></td>
-                </tr>
-            </tfoot>
-        </table>
+                                <!--<input type="number" class="form-control product-price w-50 float-left" name="price[]" value="{{ product.price }}">
 
-    </section>
-    {% endfor %}
+                                <select class="form-control product-price w-50 float-left" name="unit[]">
+                                    {% for unit in all_units %}
+                                    <option value="{{ unit.id }}" {% if product.unit_id == unit.id %}selected="selected"{% endif %}>{{ unit.name }}</option>
+                                    {% endfor %}
+                                </select>-->
 
-</div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td><td><button class="save btn btn-sm btn-outline-secondary addProduct" data-category-id="{{ category.id }}" data-toggle="modal" data-target="#productModal"><i class="fas fa-plus"></i> Add</button></td>
+                        </tr>
+                    </tfoot>
+                </table>
 
-</div>
-    <div class="container text-center">
-        <button type="submit" class="save btn btn-lg btn-outline-success"><i class="fas fa-save"></i> Save changes</button>
+            </section>
+            {% endfor %}
+
+        </div>
+
     </div>
+    <!--<div class="container text-center">
+        <button type="submit" class="save btn btn-lg btn-outline-success"><i class="fas fa-save"></i> Save changes</button>
+    </div>-->
     <div class="container text-center mt-3 ">
         <a href="/">Back to overview</a>
     </div>
 </form>
+
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="productForm">
+            <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Name*:</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id" class="col-form-label">Product category*:</label>
+                        <select class="form-control" id="category_id" required>
+                            {% for category in all_categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="price" class="col-form-label">Price in CEDI*:</label>
+                            <input type="number" class="form-control" id="price" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="unit" class="col-form-label">Unit*:</label>
+                            <select class="form-control" id="unit_id" required>
+                                {% for unit in all_units %}
+                                <option value="{{ unit.id }}">{{ unit.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <hr class="separator">
+                    <div class="form-group">
+                        <label for="seller_name" class="col-form-label">Seller name (optional)</label>
+                        <input type="text" class="form-control" id="seller_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="seller_location" class="col-form-label">Seller location (optional):</label>
+                        <input type="text" class="form-control" id="seller_location">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="saveProduct">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
 <script src="{% static "marketplace/js/housekeeping.js" %}"></script>
 {% endblock %}

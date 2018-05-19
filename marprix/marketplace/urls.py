@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('market-leader', views.housekeeping, name='housekeeping'),
     path('save', views.save, name='save'),
+    path('delete/<int:product_id>', views.delete, name='delete'),
     path('VXML/welcome', views.voice_welcome, name='voice_welcome'),
     path('VXML/categories', views.voice_categories, name='voice_categories'),
     path('VXML/IDs', views.ids, name='ids'),

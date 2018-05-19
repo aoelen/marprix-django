@@ -32,9 +32,21 @@ table .name {
 }
 .delete {
 	color:#e66363;
-	font-size:14px;
+	cursor:pointer;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.edit {
+	color:#007bff;
+	font-size: 14px;
 	cursor:pointer;
 }
 #templates {
 	display: none;
+}
+.extraInfo {
+	font-size: 14px
+}
+.extraInfo i{
+	color: rgb(185, 185, 185);
 }

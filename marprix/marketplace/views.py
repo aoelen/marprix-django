@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 # Import the needed models
 from .models import Product, Category, Unit, History
+from django.core import serializers
+
 
 
 def index(request):
@@ -37,15 +39,14 @@ def housekeeping(request):
         'all_categories': all_categories,
         'all_products' : all_products,
         'all_units': all_units,
-        'success': success
+        'success': success,
+        'productsJson': serializers.serialize('json', all_products)
     }
 
     return render(request, 'marketplace/housekeeping.html', context)
-
+'''
 def save(request):
-    '''
-    Save the data posted in the houseeking file
-    '''
+
     # Get all the POST parameters, which are arrays
     names = request.POST.getlist('name[]')
     prices = request.POST.getlist('price[]')
@@ -62,6 +63,49 @@ def save(request):
 
     # Redirect, show success message
     return HttpResponseRedirect('/market-leader?success=True')
+'''
+
+def save(request):
+    '''
+    Save the data posted in the houseeking file
+    '''
+    # Get all the POST parameters, which are arrays
+    name = request.POST.get('name')
+    category_id = request.POST.get('category_id')
+    price = request.POST.get('price')
+    unit_id = request.POST.get('unit_id')
+    seller_name = request.POST.get('seller_name')
+    seller_location = request.POST.get('seller_location')
+    product_id = request.POST.get('product_id', False)
+
+    if product_id == False:
+        new_product = Product(name=name,category_id=category_id,price=price,unit_id=unit_id,seller_name=seller_name,seller_location=seller_location)
+    else:
+        new_product = Product(id=product_id,name=name,category_id=category_id,price=price,unit_id=unit_id,seller_name=seller_name,seller_location=seller_location)
+
+    new_product.save()
+
+    '''prices = request.POST.getlist('price[]')
+    units = request.POST.getlist('unit[]')
+    categories = request.POST.getlist('category[]')'''
+
+    # Delete all products
+    #Product.objects.all().delete()
+
+    # Enter all products again in the database
+    '''for index, name in enumerate(names):
+        new_product = Product(name=name,category_id=categories[index],unit_id=units[index],price=prices[index])
+        new_product.save()
+
+    # Redirect, show success message
+    return HttpResponseRedirect('/market-leader?success=True')'''
+
+    return HttpResponse('')
+
+def delete(request, product_id):
+    Product.objects.filter(id=product_id).delete()
+
+    return HttpResponse('')
 
 def save_history(request, product_id):
     '''

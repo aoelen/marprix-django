@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('.addProduct').on('click',function(e) {
         e.preventDefault();
-        
+
         var product = prompt('Please type the name of the product you want to add');
 
         if (product == null) {

@@ -13,7 +13,14 @@
                 {% if product.category_id == category.id %}
                 <tr>
                     <td class="img"><img class="img-fluid" width="50" src='{% static "marketplace/img/icons/" %}{{ product.name }}.png'></td>
-                    <td class="name">{{ product.name }}<br />{{ product.price }} <small>CEDI per {{ product.unit.name }}</small></td>
+                    <td class="name">
+                        {{ product.name }}<br>
+                        {{ product.price }} <small>CEDI per {{ product.unit.name }}</small><br>
+                        <div class="extraInfo">
+                            {% if product.seller_name %}<i class="fas fa-user"></i> {{ product.seller_name }}<br>{% endif %}
+                            {% if product.seller_location %}<i class="fas fa-location-arrow"></i> {{ product.seller_location }}<br>{% endif %}
+                        </div>
+                    </td>
                 </tr>
                 {% endif %}
                 {% endfor %}
