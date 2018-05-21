@@ -5,16 +5,20 @@
 <menu id="product{{ product.id }}" dtmf="true">
     <prompt>
         <break time="1s"/>
-        <!--Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}.
-
-        Press 1 if youd like to retrieve other prices in this category.
-        Press 2 if youd like to retrieve prices from other categories.
-        Press 3 if youd like to retrieve prices using a product ID-->
+        <!--Price of {{ product.name }} is: {{ product.price }} CEDI per {{ product.unit.name }}. -->
         <audio src="{% static "audio/ENG/product/thepriceof.wav" %}"/>
         <audio src="{% static "audio/ENG/shared/products/" %}{{ product.name }}.wav"/>
         <audio src="{% static "audio/ENG/product/is.wav" %}"/>
         <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.price }}.wav"/>
         <audio src="{% static "audio/ENG/shared/units/" %}{{ product.unit.name }}.wav"/>
+        
+        <!-- This product is sold by: {{product.seller_name}} -->
+        
+        <!-- The selling location is: {{product.seller_location}} --> 
+        
+        <!--Press 1 if youd like to retrieve other prices in this category.
+        Press 2 if youd like to retrieve prices from other categories.
+        Press 3 if youd like to retrieve prices using a product ID--> 
         <audio src="{% static "audio/ENG/product/endofproductincategories.wav" %}"/>
     </prompt>
     <choice next="../products/{{ product.category_id }}"/>
