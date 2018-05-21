@@ -21,12 +21,14 @@ _The names Marprice and Marprix are used interchangeably. Both the names refer t
 
 ## 3. Installation instructions
 Local installation (make sure to have Python and Django installed first, optionally work in a virtual environment)
-1. `$ git clone https://github.com/aoelen/marprix-django`
-2. Install the required packages: `$ pip install -r requirements.txt`
-3. Import the database: `$ psql mydatabase < database.sql` (replace mydatabase by your database name)
-4. Change the database settings in: `marprix/marprix/settings.py`
-4. Run the server: `$ python marprix/manage.py runserver`
-5. Visit Marprice at: `http://localhost:8000`
+- `$ git clone https://github.com/aoelen/marprix-django`
+ - (Optionally create a virtual environment using: `$ virtualenv venv`)
+ - (Optionally activate the environment: `$ source venv/bin/activate`)
+- Install the required packages: `$ pip install -r requirements.txt`
+- Import the database: `$ psql mydatabase < database.sql` (replace mydatabase by your database name) - or - import the database using your own preferred method 
+- Change the database settings in: `marprix/marprix/settings.py` (starts on line 77)
+- Run the server: `$ python marprix/manage.py runserver`
+- Visit Marprice at: `http://localhost:8000`
 
 ## 4. Application functionality
 In this section, the functionality of Marprice is briefly explained. For a detailed description of this application, please have a look at our project report

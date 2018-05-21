@@ -22,7 +22,7 @@ class Product(models.Model):
     unit = models.ForeignKey(Unit, on_delete=models.CASCADE, default = None, null = True)
     seller_name = models.CharField(max_length=255,default = None, null = True, blank = True)
     seller_location = models.CharField(max_length=255,default = None, null = True, blank = True)
-    last_update = models.DateTimeField(auto_now_add=True, blank = True)
+    last_update = models.DateTimeField(auto_now=True, blank = True)
 
     def __str__(self):
         return self.name
