@@ -35,9 +35,9 @@
         </div>
         {% endif %}
 
-        <div class="row">
-
-            {% for category in all_categories %}
+        
+        {% for category in all_categories %}
+            {% if not forloop.counter|divisibleby:2 %}<div class="row">{% endif %}
             <section class="col category">
                 <h1 class="category-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
 
@@ -82,9 +82,9 @@
                 </table>
 
             </section>
-            {% endfor %}
+            {% if forloop.counter|divisibleby:2 or forloop.last %}</div>{% endif %}
+        {% endfor %}
 
-        </div>
 
     </div>
     <!--<div class="container text-center">
