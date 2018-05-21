@@ -12,10 +12,18 @@
         <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.price }}.wav"/>
         <audio src="{% static "audio/ENG/shared/units/" %}{{ product.unit.name }}.wav"/>
         
-        <!-- This product is sold by: {{product.seller_name}} -->
+        <!-- Optional, seller name and location -->
+        <!-- The seller of this product is: {{product.seller_name}} -->
+        {% if product.seller_name %}
+        <audio src="{% static "audio/ENG/product/seller_name.wav" %}"/>
+        <audio src="{% static "audio/ENG/examples/names/" %}{{product.seller_name|urlencode}}.wav"/>
+        {% endif %}
         
-        <!-- The selling location is: {{product.seller_location}} --> 
-        
+        {% if product.seller_location %}
+        <!-- This product is sold at the following location: {{product.seller_location}} --> 
+        <audio src="{% static "audio/ENG/product/seller_location.wav" %}"/>
+        <audio src="{% static "audio/ENG/examples/locations/" %}{{product.seller_location|urlencode}}.wav"/>
+        {% endif %}
         <!--Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
         Press 3 if youd like to retrieve prices using a product ID--> 

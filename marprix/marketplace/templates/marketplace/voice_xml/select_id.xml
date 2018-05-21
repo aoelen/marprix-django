@@ -10,6 +10,20 @@
         <audio src="{% static "audio/ENG/product/is.wav" %}"/>
         <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.price }}.wav"/>
         <audio src="{% static "audio/ENG/shared/units/" %}{{ product.unit.name }}.wav"/>
+        
+        <!-- Optional, seller name and location -->
+        <!-- The seller of this product is: {{product.seller_name}} -->
+        {% if product.seller_name %}
+        <audio src="{% static "audio/ENG/product/seller_name.wav" %}"/>
+        <audio src="{% static "audio/ENG/examples/names/" %}{{product.seller_name|urlencode}}.wav"/>
+        {% endif %}
+        
+        {% if product.seller_location %}
+        <!-- This product is sold at the following location: {{product.seller_location}} --> 
+        <audio src="{% static "audio/ENG/product/seller_location.wav" %}"/>
+        <audio src="{% static "audio/ENG/examples/locations/" %}{{product.seller_location|urlencode}}.wav"/>
+        {% endif %}
+        
         <audio src="{% static "audio/ENG/ids/endmenu.wav" %}"/>
     </prompt>
     <choice next="../ids"/>
