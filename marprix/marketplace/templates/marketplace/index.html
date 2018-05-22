@@ -4,8 +4,8 @@
 {% block content %}
     {% for category in all_categories %}
     {% if not forloop.counter|divisibleby:2 %}<div class="row">{% endif %}
-    <section class="col category">
-        <h1 class="category-title">{{ category.name }}<br></h1>
+    <section class="card col category">
+        <h1 class="category-title card-title">{{ category.name }}<br></h1>
 
         <table class="table table">
             <tbody>

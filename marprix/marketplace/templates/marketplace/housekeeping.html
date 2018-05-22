@@ -38,8 +38,8 @@
         
         {% for category in all_categories %}
             {% if not forloop.counter|divisibleby:2 %}<div class="row">{% endif %}
-            <section class="col category">
-                <h1 class="category-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
+            <section class="col categoryc card">
+                <h1 class="category-title card-title">{{ category.name }}<br><small>Price in CEDI</small></h1>
 
                 <table class="table table">
                     <tbody>
