@@ -26,7 +26,7 @@
         
         <audio src="{% static "audio/ENG/ids/endmenu.wav" %}"/>
     </prompt>
-    <choice next="../ids"/>
+    <choice next="../IDs"/>
     <choice next="../categories" dtmf="0"/>
 </menu>
 
