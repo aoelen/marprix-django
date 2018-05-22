@@ -1,0 +1,23 @@
+{% extends 'marketplace/voice_xml/layout.xml' %}
+{% load static %}
+
+{% block content %}
+
+<menu id="ID{{ product.id }}" dtmf="true">
+    <prompt>
+		<!-- 
+		Provide product ID to the caller {{product.id}}
+		-->
+		
+		<!-- The product ID of your product is: -->
+		<audio src="{% static "audio/ENG/ids/product_id_is.wav" %}"/>
+        <audio src="{% static "audio/ENG/shared/numbers/" %}{{ product.id }}.wav"/>
+        
+        <audio src="{% static "audio/ENG/ids/endofproductincategories_ids.wav" %}"/>
+    </prompt>
+	<choice next="../products/{{ product.category_id }}"/>
+    <choice next="../categories"/>
+    <choice dtmf="0" next="../IDs"/>
+</menu>
+
+{% endblock %}

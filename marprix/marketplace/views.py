@@ -197,6 +197,17 @@ def select_product(request, product_id):
 
     return render(request, 'marketplace/voice_xml/select_product.xml', context, content_type="application/xhtml+xml")
 
+def retrieve_product_id(request, product_id):
+    '''
+    Provide the product id to the caller 
+    '''
+    product = Product.objects.get(id=product_id);
+    context = {
+        'product': product
+    }
+
+    return render(request, 'marketplace/voice_xml/retrieve_product_id.xml', context, content_type="application/xhtml+xml")
+
 def select_id(request, product_id):
     '''
     Product selected based on ID

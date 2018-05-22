@@ -26,11 +26,12 @@
         {% endif %}
         <!--Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
-        Press 3 if youd like to retrieve prices using a product ID--> 
+        Press 0 if youd like to retrieve prices using a product ID--> 
         <audio src="{% static "audio/ENG/product/endofproductincategories.wav" %}"/>
     </prompt>
     <choice next="../products/{{ product.category_id }}"/>
     <choice next="../categories"/>
+    <choice next="../retrieve_product_id/{{ product.id }}"/>
     <choice dtmf="0" next="../IDs"/>
 </menu>
 {% endblock %}
