@@ -26,6 +26,7 @@
         {% endif %}
         <!--Press 1 if youd like to retrieve other prices in this category.
         Press 2 if youd like to retrieve prices from other categories.
+            Press 3 if you'd like to know the product ID of this product.
         Press 0 if youd like to retrieve prices using a product ID--> 
         <audio src="{% static "audio/ENG/product/endofproductincategories.wav" %}"/>
     </prompt>

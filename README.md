@@ -11,7 +11,7 @@
 ## 1. Introduction
 Marprice provides farmers in rural areas of Africa the most recent market prices. Marprice offers both the front-end and back-end. In the back-end products can be added, delete or product prices can be updated. The front-end can be accessed from both a web interface and via a voice interface. The full version working version of this application can be accessed via: http://marprice.herokuapp.com/
 
-_The names Marprice and Marprix are used interchangeably. Both the names refer to the same application._
+_N.B. The names Marprice and Marprix are used interchangeably. Both the names refer to the same application._
 
 ## 2. Installation requirements
 - Python 3.6 or higher
@@ -53,3 +53,42 @@ Link: http://marprice.herokuapp.com/market-leader Via this interface, a market l
 
 ## 5. Application code
 Since this application is built using the Django web framework, some code in this repository is needed for Django and is not very interesting to look into. The most important file is: `marprix/marketplace/views.py`. In this file the views are defined, also the functions in this file are commented.
+
+## 6. Changelog 
+This application has been built in multiple iterations. The first iteration is not included in this repository, since the complete application has been rebuilt in the second iteration. The improvements in this application are based on feedback from stakeholders in Ghana (this feedback is collected by Francis Dittoh). N.B. version numbers are not included as tags in this repository, they are only used in the documentation. 
+
+#### Version 3 - 25 May 2018
+##### Added
+- Option to add seller's name for a product
+    - Include this information in the voice and web front-end
+- Option to add seller's location for a product
+- Updating products in a new update dialog (this functionality is replacing the previous method of updating products)
+- Product IDs can be requested via the voice interface (as an extra DTMF option)
+- Web front-end and web back-end are responsive 
+- New seeds category for requesting seed prices and selling locations 
+
+##### Changed
+- Ensure that multiple categories can be added with respect to the design of the site
+- Fix a bug where products IDs where changed after a product update
+- Fix bug where returning to categories resulted in a fatal error 
+- Some voice files are improved for better consistency
+- Improved design (grey background, categories in boxes)
+
+#### Version 2 - 6 May 2018
+##### Added 
+- Create a new front-end for farmers (in addition to the voice interface)
+- Added unit selection for products
+- History functionality: welcome caller, and provide function to retrieve latest product
+- Added products and related units that are relevant to rural Ghana 
+
+##### Changed
+- PHP application from version 1 has been ported to Django 
+- Ensure that no external libraries are needed, so the system can work without internet connection
+- Pre-record all sentences, so internet connected TTS is not needed anymore
+- Make categories dynamic instead of hard-coded 
+- Record all product requests (for statistics and history functionality)
+- Fix small inconsistencies in the voice files
+- Fix small design flaws 
+
+#### Version 1 - 18 April 2018
+- Initial prototype version of Marprice (code can be found online via: https://github.com/aoelen/marprix)
