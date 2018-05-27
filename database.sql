@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 10.3 (Ubuntu 10.3-1.pgdg14.04+1)
--- Dumped by pg_dump version 10.3
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -457,7 +457,9 @@ CREATE TABLE public.marketplace_product (
     sort integer,
     last_update timestamp with time zone NOT NULL,
     category_id integer NOT NULL,
-    unit_id integer
+    unit_id integer,
+    seller_location character varying(255),
+    seller_name character varying(255)
 );
 
 
@@ -669,7 +671,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$100000$epLExiwXXfG2$jQkhjo67F++Iw9FUCNGQRmM+yltvaPPfiKdmngIxulE=	2018-05-03 07:01:55.401452+00	t	admin			user@site.com	t	t	2018-05-01 20:51:38.116702+00
+1	pbkdf2_sha256$100000$epLExiwXXfG2$jQkhjo67F++Iw9FUCNGQRmM+yltvaPPfiKdmngIxulE=	2018-05-22 10:31:55.92833+00	t	admin			user@site.com	t	t	2018-05-01 20:51:38.116702+00
 \.
 
 
@@ -741,6 +743,45 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 45	2018-05-03 08:09:53.799711+00	15	Barley	2	[]	2	1
 46	2018-05-03 08:09:59.800784+00	14	Sorghum	2	[{"changed": {"fields": ["price"]}}]	2	1
 47	2018-05-04 09:18:25.662836+00	3	Vegetables	2	[{"changed": {"fields": ["name"]}}]	1	1
+48	2018-05-19 16:19:43.653409+00	4	Seeds	1	[{"added": {}}]	1	1
+49	2018-05-19 16:20:03.068993+00	4	Seeds	2	[{"changed": {"fields": ["sort"]}}]	1	1
+50	2018-05-22 08:43:22.711299+00	123	Cabbage	2	[{"changed": {"fields": ["unit"]}}]	2	1
+51	2018-05-22 10:25:14.675759+00	1	Tomatoes	2	[{"changed": {"fields": ["id"]}}]	2	1
+52	2018-05-22 10:25:30.095099+00	2	Peppers	2	[{"changed": {"fields": ["id"]}}]	2	1
+53	2018-05-22 10:25:42.254578+00	3	Onions	2	[{"changed": {"fields": ["id"]}}]	2	1
+54	2018-05-22 10:25:51.77767+00	4	Okro	2	[{"changed": {"fields": ["id"]}}]	2	1
+55	2018-05-22 10:25:57.400673+00	5	Cabbage	2	[{"changed": {"fields": ["id"]}}]	2	1
+56	2018-05-22 10:26:02.591035+00	6	Cabbage	2	[{"changed": {"fields": ["id"]}}]	2	1
+57	2018-05-22 10:26:09.572086+00	7	Sorghum	2	[{"changed": {"fields": ["id"]}}]	2	1
+58	2018-05-22 10:26:15.132025+00	8	Rice	2	[{"changed": {"fields": ["id"]}}]	2	1
+59	2018-05-22 10:26:20.193996+00	9	Millet	2	[{"changed": {"fields": ["id"]}}]	2	1
+60	2018-05-22 10:26:25.336869+00	11	Mais	2	[{"changed": {"fields": ["id"]}}]	2	1
+61	2018-05-22 10:26:30.964882+00	12	Barley	2	[{"changed": {"fields": ["id"]}}]	2	1
+62	2018-05-22 10:26:37.660566+00	13	Watermelon	2	[{"changed": {"fields": ["id"]}}]	2	1
+63	2018-05-22 10:27:39.804226+00	14	Pineapple	2	[{"changed": {"fields": ["id"]}}]	2	1
+64	2018-05-22 10:27:45.756257+00	15	Pawpaw	2	[{"changed": {"fields": ["id"]}}]	2	1
+65	2018-05-22 10:28:22.363276+00	16	Oranges	2	[{"changed": {"fields": ["id"]}}]	2	1
+66	2018-05-22 10:28:51.733135+00	17	Bananas	2	[{"changed": {"fields": ["id"]}}]	2	1
+67	2018-05-22 10:29:09.190216+00	18	Cabbage	2	[{"changed": {"fields": ["id"]}}]	2	1
+68	2018-05-22 10:29:15.18841+00	19	Tomatoes	2	[{"changed": {"fields": ["id"]}}]	2	1
+69	2018-05-22 10:30:59.679287+00	123	Cabbage	3		2	1
+70	2018-05-22 10:30:59.684826+00	122	Tomatoes	3		2	1
+71	2018-05-22 10:30:59.689067+00	121	Tomatoes	3		2	1
+72	2018-05-22 10:30:59.693134+00	120	Peppers	3		2	1
+73	2018-05-22 10:30:59.697407+00	119	Onions	3		2	1
+74	2018-05-22 10:30:59.702014+00	118	Okro	3		2	1
+75	2018-05-22 10:30:59.706414+00	117	Cabbage	3		2	1
+76	2018-05-22 10:30:59.711101+00	116	Sorghum	3		2	1
+77	2018-05-22 10:30:59.715686+00	115	Rice	3		2	1
+78	2018-05-22 10:30:59.720048+00	114	Millet	3		2	1
+79	2018-05-22 10:30:59.72414+00	113	Mais	3		2	1
+80	2018-05-22 10:30:59.729759+00	112	Barley	3		2	1
+81	2018-05-22 10:30:59.733671+00	111	Watermelon	3		2	1
+82	2018-05-22 10:30:59.738507+00	110	Pineapple	3		2	1
+83	2018-05-22 10:30:59.742622+00	109	Pawpaw	3		2	1
+84	2018-05-22 10:30:59.747415+00	108	Oranges	3		2	1
+85	2018-05-22 10:30:59.752239+00	107	Bananas	3		2	1
+86	2018-05-22 10:31:38.623138+00	5	Cabbage	3		2	1
 \.
 
 
@@ -785,6 +826,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 16	sessions	0001_initial	2018-05-01 18:30:01.264386+00
 17	marketplace	0003_auto_20180502_0944	2018-05-02 10:06:33.871746+00
 18	marketplace	0004_history	2018-05-02 20:28:53.32057+00
+19	marketplace	0005_auto_20180518_1624	2018-05-19 16:19:13.419001+00
 \.
 
 
@@ -803,7 +845,6 @@ cgro2xavyyonjlg8dukyrtlq28zc4ni2	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4Zjl
 nrpx40pc351t8uhq8oyo782yp7q5y2h2	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-05-17 10:44:48.54705+00
 ybv83sotncnohjcwqvowcfw7yjf5v41o	YjIzZjVhYjZhNDI3ODdjMWI2NDFlMGJhYjQwNjhhNzNlMTI5YWJhODp7ImNhbGxlcmlkIjoiMDY0ODYzMTE4MyJ9	2018-05-17 11:12:41.799165+00
 yf8upo7vqygtq6z4rmiy9tu4mzv5y5h9	YjIzZjVhYjZhNDI3ODdjMWI2NDFlMGJhYjQwNjhhNzNlMTI5YWJhODp7ImNhbGxlcmlkIjoiMDY0ODYzMTE4MyJ9	2018-05-17 11:16:12.415457+00
-obu97exik76ygz9z5y7ygcrip9ome5y5	ZjNhN2Y3ZTdkNmUwZTM1ZTJmZDkxNmU3NjlhYTdiM2I1NWViZWY1Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3IiwiY2FsbGVyaWQiOiJVbmtub3duIn0=	2018-05-17 16:23:14.895571+00
 vv6mpsjx1nfxd029emt8xnxwb19rt3ml	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-05-17 16:25:36.333481+00
 eufb1g1pii46bngki4a70ov137e1lwih	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-05-17 16:29:27.099595+00
 sa4e3crtxppchajbjotn4cpncivslqow	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-05-17 16:30:31.139765+00
@@ -828,6 +869,29 @@ jvbmny8l1vbm82c6ts4c0wmy5hts5nc3	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTk
 a9tyjrloy2w4cah5yna93crl6f8376fi	YjIzZjVhYjZhNDI3ODdjMWI2NDFlMGJhYjQwNjhhNzNlMTI5YWJhODp7ImNhbGxlcmlkIjoiMDY0ODYzMTE4MyJ9	2018-05-20 11:23:36.49085+00
 mmg2pal4js172b6hhhvm215lzah7029d	ZjNhN2Y3ZTdkNmUwZTM1ZTJmZDkxNmU3NjlhYTdiM2I1NWViZWY1Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3IiwiY2FsbGVyaWQiOiJVbmtub3duIn0=	2018-05-20 11:23:49.016624+00
 5s18l84ooj33z5pmei7jf4q7xd3yama8	YjIzZjVhYjZhNDI3ODdjMWI2NDFlMGJhYjQwNjhhNzNlMTI5YWJhODp7ImNhbGxlcmlkIjoiMDY0ODYzMTE4MyJ9	2018-05-20 11:24:10.642656+00
+obu97exik76ygz9z5y7ygcrip9ome5y5	ZjNhN2Y3ZTdkNmUwZTM1ZTJmZDkxNmU3NjlhYTdiM2I1NWViZWY1Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3IiwiY2FsbGVyaWQiOiJVbmtub3duIn0=	2018-05-20 20:41:26.112707+00
+xkfowmou42g3t6yr5jx5cnn6ovqa8x3r	ZWFkMWMyYWYwZjI1OWY2MTQ1MmJkZTM1ZmYxZDYzMjU4OTMxYjE0Yzp7ImNhbGxlcmlkIjoiMDYyOTU4MjkwNiJ9	2018-05-27 22:30:59.682784+00
+vs3tuunwbppqzjezssudzbq705p4l8am	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-05-27 22:33:19.06636+00
+trpolulxgpxoy2o8l9n564zcozxj391a	ZWFkMWMyYWYwZjI1OWY2MTQ1MmJkZTM1ZmYxZDYzMjU4OTMxYjE0Yzp7ImNhbGxlcmlkIjoiMDYyOTU4MjkwNiJ9	2018-05-27 22:33:57.489311+00
+j8k2w8xqmpkln7m2gs1bp4x1hl8ltn8f	ZWFkMWMyYWYwZjI1OWY2MTQ1MmJkZTM1ZmYxZDYzMjU4OTMxYjE0Yzp7ImNhbGxlcmlkIjoiMDYyOTU4MjkwNiJ9	2018-05-27 22:36:03.693679+00
+43l9zgg59e7b79yxltuj5t6dzw16n6wf	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-06-01 15:54:39.136409+00
+4731bb64808nolinoivexo03b9zuoyfd	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-06-04 11:56:31.177123+00
+mq36noly8wvyt7und6l8itbgifmsgdog	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-06-04 11:57:17.386153+00
+6x9oxv2n4it9rkcsg1cbuli1tvuhg7l1	OTVhNGY4NzVmYzc0YTg3OGIzOWY0OTMzMDFlMjFkYmI4ZjlhZDAwNjp7ImNhbGxlcmlkIjoiMDYxMjQ4NjkxMyJ9	2018-06-04 12:00:09.526807+00
+jdv7kyt6hzo8a62wjizsxxx4qa0hqtia	NWU1NTU2NGI3OTFiODgyMTAxMmQ1NGM0Nzc0ZGE5YTU0YWZiYTliNzp7ImNhbGxlcmlkIjoiVW5rbm93biIsIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3In0=	2018-06-05 08:42:28.763454+00
+bo5ae8bhv7bcoxdkdffx4y1oaf6da3gb	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 09:43:21.659166+00
+la63sh4ldffjjmlt3qi2yfnnldzklgsg	ZjNhN2Y3ZTdkNmUwZTM1ZTJmZDkxNmU3NjlhYTdiM2I1NWViZWY1Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3IiwiY2FsbGVyaWQiOiJVbmtub3duIn0=	2018-06-05 10:09:41.017591+00
+74csro4wbu7zp0n2wl6039x08onp5im7	M2M0YjcxN2NiOWUxMTVjZTY2YWFmMjQxMjJiMmNiZmVkOTYzNjE2NTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NjRlNGEzZjNiYjNmNWE1NjAzZGQyZDVlYTk4ZWUwYTcxZjNiNzU3In0=	2018-06-05 10:31:55.933235+00
+j0qfmm6tp5wi0a8aizjnyojko9xf5d87	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 11:05:46.892379+00
+xgs85114ghb99fx3bf3pijyxuu64mbjl	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 11:07:41.578187+00
+hyi9uc8quiasi8yz3mrprgyf03222zax	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 11:09:15.874085+00
+m08twtqxfb74i01w3kt81v3tet26zhtd	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 12:25:16.34339+00
+8a73bk2bj3showso4z4u78p67xx9087p	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 12:38:10.227423+00
+obxkpxvyod0qeod1mh9u8escz6ntfv88	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 12:45:26.05981+00
+z42u67lj3t51xsvj8idi2vhv5o5174ln	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 12:51:10.960686+00
+aa3ppz8xgogtgvc3rec36hk3znkf8dul	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 12:58:39.125067+00
+78sxh188cf65dokisqjj9ojxemta2jfw	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 13:04:13.411819+00
+2gnkiay5xli9r8c9nipsgduz8ehy7cy7	ODlhMGZkMzZhMzU2N2E1MWFmMDM5MDg1MmJhMTA0MDZmNTkxM2MxYzp7ImNhbGxlcmlkIjoiVW5rbm93biJ9	2018-06-05 13:04:49.638998+00
 \.
 
 
@@ -839,6 +903,7 @@ COPY public.marketplace_category (id, name, sort) FROM stdin;
 1	Fruits	\N
 2	Cereals	\N
 3	Vegetables	\N
+4	Seeds	\N
 \.
 
 
@@ -847,11 +912,17 @@ COPY public.marketplace_category (id, name, sort) FROM stdin;
 --
 
 COPY public.marketplace_history (id, callerid, last_product_id) FROM stdin;
-19	0648631183	96
-20	0648631183	104
-21	0648631183	92
-22	Unknown	92
-23	Unknown	101
+33	Unknown	1
+34	0	8
+35	Unknown	19
+36	0	3
+37	0	17
+38	0	17
+39	0	17
+40	0	17
+41	0	15
+42	0	17
+43	0	17
 \.
 
 
@@ -859,22 +930,24 @@ COPY public.marketplace_history (id, callerid, last_product_id) FROM stdin;
 -- Data for Name: marketplace_product; Type: TABLE DATA; Schema: public; Owner: evkxunitfmfbxq
 --
 
-COPY public.marketplace_product (id, name, price, sort, last_update, category_id, unit_id) FROM stdin;
-92	Bananas	4	\N	2018-05-04 11:57:46.990468+00	1	2
-93	Oranges	2	\N	2018-05-04 11:57:46.995546+00	1	1
-94	Pawpaw	3	\N	2018-05-04 11:57:46.999587+00	1	3
-95	Pineapple	2	\N	2018-05-04 11:57:47.003826+00	1	3
-96	Watermelon	5	\N	2018-05-04 11:57:47.01153+00	1	3
-97	Barley	3	\N	2018-05-04 11:57:47.023876+00	2	1
-98	Mais	5	\N	2018-05-04 11:57:47.031674+00	2	1
-99	Millet	6	\N	2018-05-04 11:57:47.035822+00	2	1
-100	Rice	7	\N	2018-05-04 11:57:47.040308+00	2	1
-101	Sorghum	9	\N	2018-05-04 11:57:47.045357+00	2	1
-102	Cabbage	3	\N	2018-05-04 11:57:47.049217+00	3	3
-103	Okro	2	\N	2018-05-04 11:57:47.053201+00	3	5
-104	Onions	87	\N	2018-05-04 11:57:47.057156+00	3	4
-105	Peppers	5	\N	2018-05-04 11:57:47.061183+00	3	1
-106	Tomatoes	20	\N	2018-05-04 11:57:47.065076+00	3	4
+COPY public.marketplace_product (id, name, price, sort, last_update, category_id, unit_id, seller_location, seller_name) FROM stdin;
+15	Pawpaw	12	\N	2018-05-22 12:49:47.746693+00	1	2		
+17	Bananas	9	\N	2018-05-24 19:17:26.312315+00	1	3		
+1	Tomatoes	20	\N	2018-05-22 10:25:14.671125+00	3	4	\N	\N
+2	Peppers	5	\N	2018-05-22 10:25:30.093635+00	3	1	\N	\N
+3	Onions	88	\N	2018-05-22 10:25:42.252768+00	3	4	\N	\N
+4	Okro	2	\N	2018-05-22 10:25:51.776176+00	3	5	\N	\N
+6	Cabbage	3	\N	2018-05-22 10:26:02.589519+00	3	3	\N	\N
+7	Sorghum	9	\N	2018-05-22 10:26:09.570629+00	2	1	\N	\N
+8	Rice	7	\N	2018-05-22 10:26:15.130053+00	2	1	\N	\N
+9	Millet	6	\N	2018-05-22 10:26:20.19189+00	2	1	\N	\N
+11	Mais	5	\N	2018-05-22 10:26:25.335493+00	2	1	\N	\N
+12	Barley	3	\N	2018-05-22 10:26:30.963527+00	2	1	\N	\N
+13	Watermelon	5	\N	2018-05-22 10:26:37.659182+00	1	3	\N	\N
+14	Pineapple	2	\N	2018-05-22 10:27:39.80259+00	1	3	\N	\N
+16	Oranges	2	\N	2018-05-22 10:28:22.361828+00	1	1	\N	\N
+18	Cabbage	100	\N	2018-05-22 10:29:09.188601+00	4	1	The Eastern Region on the Last Floor Oteng House	Afia
+19	Tomatoes	10	\N	2018-05-22 10:29:15.18698+00	4	1	Greater Accra, East Legon	Abimbola
 \.
 
 
@@ -937,7 +1010,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: evkxunitfmfbxq
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 47, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 86, true);
 
 
 --
@@ -951,28 +1024,28 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 10, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: evkxunitfmfbxq
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 18, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);
 
 
 --
 -- Name: marketplace_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: evkxunitfmfbxq
 --
 
-SELECT pg_catalog.setval('public.marketplace_category_id_seq', 3, true);
+SELECT pg_catalog.setval('public.marketplace_category_id_seq', 4, true);
 
 
 --
 -- Name: marketplace_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: evkxunitfmfbxq
 --
 
-SELECT pg_catalog.setval('public.marketplace_history_id_seq', 23, true);
+SELECT pg_catalog.setval('public.marketplace_history_id_seq', 43, true);
 
 
 --
 -- Name: marketplace_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: evkxunitfmfbxq
 --
 
-SELECT pg_catalog.setval('public.marketplace_product_id_seq', 106, true);
+SELECT pg_catalog.setval('public.marketplace_product_id_seq', 123, true);
 
 
 --

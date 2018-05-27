@@ -9,9 +9,9 @@
 > - Allard Oelen
 
 ## 1. Introduction
-Marprice provides farmers in rural areas of Africa the most recent market prices. Marprice offers both the front-end and back-end. In the back-end products can be added, delete or product prices can be updated. The front-end can be accessed from both a web interface and via a voice interface. The full version working version of this application can be accessed via: http://marprice.herokuapp.com/
+Marprice provides farmers in rural areas of Africa the most recent market prices. Marprice offers both the front-end and back-end for this market price system. In the back-end products can be added, delete or product prices can be updated. The front-end can be accessed from both a web interface and via a voice interface. The full version working version of this application can be accessed via: http://marprice.herokuapp.com/
 
-_N.B. The names Marprice and Marprix are used interchangeably. Both the names refer to the same application._
+_N.B. The names Marprice and Marprix are used interchangeably. Both the names refer to the same application, only in a different language._
 
 ## 2. Installation requirements
 - Python 3.6 or higher
